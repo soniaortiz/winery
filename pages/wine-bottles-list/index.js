@@ -5,7 +5,7 @@ export default function WineBottles({data = []}){
 
     const setBottleFilter = async({target})=>{
         console.log(target.id);
-        const response = await fetch(`http://localhost:3000/api/bottles-filter/?wineType=${target.id}`);
+        const response = await fetch(`http://localhost:3000/api/wine-bottles/bottles-filter/?wineType=${target.id}`);
         const {data} = await response.json();
     
         setFilter(()=>({bottlesList: data, filter: target.id}))
@@ -28,7 +28,7 @@ export default function WineBottles({data = []}){
 }
 
 export async function getServerSideProps(){
-    const response = await fetch('http://localhost:3000/api/test/');
+    const response = await fetch('http://localhost:3000/api/wine-bottles/bottles-filter');
     const {data} = await response.json();
     return {
         props: {
