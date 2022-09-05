@@ -5,7 +5,7 @@ export default function WineBottles({data = []}){
 
     const setBottleFilter = async({target})=>{
         console.log(target.id);
-        const response = await fetch(`http://localhost:3000/api/wine-bottles/bottles-filter/?wineType=${target.id}`);
+        const response = await fetch(`/api/wine-bottles/bottles-filter/?wineType=${target.id}`);
         const {data} = await response.json();
     
         setFilter(()=>({bottlesList: data, filter: target.id}))

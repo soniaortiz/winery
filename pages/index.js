@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-
+import Link from 'next/Link'
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -16,19 +16,19 @@ export default function Home() {
           Welcome to Winery app
         </h1>
     <div>
-          <a
+          <Link
             href="/admin/grape/add-grape"
             className={styles.card}
           >
             add new grape
-            </a>
+            </Link>
 
-            <a
+            <Link
             href="/admin/grape/grapes-list"
             className={styles.card}
           >
             Grape Types
-            </a>
+            </Link>
         </div>
       </main>
 

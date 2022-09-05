@@ -1,7 +1,10 @@
 import styled from "styled-components";
+import {connectMongo} from '../../../../utils/connect';
+import Grape from '../../../../models/Grape';
 
-export default function GrapesList({list}){
+export default function GrapesList(props){
 
+    console.log('GGGGG', props)
     return(
             <FormContainer>
             <PageTitle>GRAPES LIST</PageTitle>
@@ -9,7 +12,7 @@ export default function GrapesList({list}){
             {
                 <List>
                     {
-                        list.map(({grapeName, grapeDescription, _id})=>{
+                        props.list.map(({grapeName, grapeDescription, _id})=>{
                             return (<li key={_id}>
                                 <GrapeName>{grapeName}</GrapeName>
                                 <p>{grapeDescription}</p>
@@ -24,16 +27,27 @@ export default function GrapesList({list}){
 
 export async function getServerSideProps(){
 
-    const response = await fetch('http://localhost:3000/api/grape/grape-list',  {
-        method: 'GET'
-    });
-    const {data} = await response.json();
+    // const response = await fetch('http://localhost:3000/api/grape/grape-list');
+    // const {data} = await response.json();
+
+    let data;
+    const client = await connectMongo();
+    try{
+        const response = await Grape.find();
+        data = JSON.parse(JSON.stringify(response));
+    } catch (e) {
+        console.error('Something wrong happend', e)
+        data = [];
+    }
+
+    client.disconnect();
 
     return{
         props:{
             list: data
         }
     }
+
 }
 
 const FormContainer = styled.div`

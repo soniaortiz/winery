@@ -76,8 +76,7 @@ export default function GrapeForm(){
                     grapeName 
                 })
             });
-            const {data} = await response.json();
-
+            const data = await response.json();
             if(data.status === 200){
                 setGrapeData(()=>({grapeName: '', grapeDescription: ''}))
             }
