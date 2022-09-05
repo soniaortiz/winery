@@ -5,4 +5,4 @@ const GrapeSchema = new Schema ({
     grapeDescription: {type: String, required: true}
 })
 
-module.exports = mongoose.models.Grape || mongoose.model('Grapes', GrapeSchema);
+module.exports = mongoose.models.Grape || mongoose.model('Grape', GrapeSchema);

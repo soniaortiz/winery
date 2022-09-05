@@ -3,10 +3,12 @@ import {connectMongo} from '../../../../utils/connect';
 import bottle from '../../../../models/bottle';
 
 export default async function handler(req, res) {
-  await connectMongo();
+  const client = await connectMongo();
   const {query} = req;
 
   const BottleList = await bottle.find({wineBottleType: query.wineType});
+
+  client.disconnect();
   res.status(200).json({ data: BottleList });
 }
  
