@@ -4,10 +4,9 @@ import Grape from '../../../../models/Grape';
 export default async function SaveGrape(req, res){
     try{
         await connectMongo();
-        const {grapeDescription, grapeName} = JSON.parse(req.body);
-        const newGrape = new Grape({grapeDescription, grapeName});
-        const a = await newGrape.save();
-        res.send({status: 200, message: 'New grape added'});
+        const response = await Grape.find();
+        console.log('@@@@@@@@@@', response);
+        res.send({status: 200, message: 'New grape added', data: 'hello'});
     } catch{
         res.send({status: 500, message: 'Someting went wrong'});
     }

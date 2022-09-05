@@ -17,10 +17,17 @@ export default function Home() {
         </h1>
     <div>
           <a
-            href="/admin/grape"
+            href="/admin/grape/add-grape"
             className={styles.card}
           >
             add new grape
+            </a>
+
+            <a
+            href="/admin/grape/grapes-list"
+            className={styles.card}
+          >
+            Grape Types
             </a>
         </div>
       </main>

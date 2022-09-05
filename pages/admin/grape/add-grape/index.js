@@ -69,15 +69,18 @@ export default function GrapeForm(){
         validateData();
 
         if(!missingDataError){
-            const response = await fetch('/api/grape/new-grape', {
+            const response = await fetch('http://localhost:3000/api/grape/new-grape', {
                 method: 'POST',
                 body: JSON.stringify({
                     grapeDescription , 
                     grapeName 
                 })
             });
-            const data = await response.json();
-            console.log('$$$$$$', data);
+            const {data} = await response.json();
+
+            if(data.status === 200){
+                setGrapeData(()=>({grapeName: '', grapeDescription: ''}))
+            }
         }
     }
 
