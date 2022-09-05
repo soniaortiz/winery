@@ -1,24 +1,24 @@
+import styled from "styled-components";
 
 export default function GrapesList({list}){
 
     return(
-        <div>
-            <h1>GRAPES LIST</h1>
-            <div>
+            <FormContainer>
+            <PageTitle>GRAPES LIST</PageTitle>
+
             {
-                <ul>
+                <List>
                     {
                         list.map(({grapeName, grapeDescription, _id})=>{
                             return (<li key={_id}>
-                                <p>{grapeName}</p>
+                                <GrapeName>{grapeName}</GrapeName>
                                 <p>{grapeDescription}</p>
                             </li>)
                         })
                     }
-                </ul>
+                </List>
             }               
-            </div>
-        </div>
+            </FormContainer>
     );
 }
 
@@ -35,3 +35,27 @@ export async function getServerSideProps(){
         }
     }
 }
+
+const FormContainer = styled.div`
+    display: block;
+    margin: auto;
+    width: 80%;
+    height: 100vh;
+`
+
+const PageTitle = styled.h1`
+    margin: auto;
+    width: 50%;
+    text-align: center;
+`
+
+const List = styled.ul`
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    list-style: none;
+`
+
+const GrapeName = styled.p`
+font-weight: bold;
+`

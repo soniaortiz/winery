@@ -1,0 +1,13 @@
+.containerPage{
+display: block;
+margin: auto;
+width: 80%;
+height: 100vh;
+}
+
+.pageTitle{
+    color: red;
+margin: auto;
+width: 10;
+text-align: center;
+}
