@@ -4,7 +4,6 @@ export default function WineBottles({data = []}){
     const [{filter, bottlesList}, setFilter] = useState(()=>({bottlesList: data, filter: ''}));
 
     const setBottleFilter = async({target})=>{
-        console.log(target.id);
         const response = await fetch(`/api/wine-bottles/bottles-filter/?wineType=${target.id}`);
         const {data} = await response.json();
     

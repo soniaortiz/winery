@@ -24,3 +24,18 @@ a {
     background: black;
   }
 }
+
+.headerStyle{
+  color: red;
+  margin: auto;
+  width: 80%;
+  background-color: black;
+  height: 30%;
+}
+
+ 
+.buttonMenu{
+  color: green;
+  margin: 10%;
+  background-color: azure;
+}

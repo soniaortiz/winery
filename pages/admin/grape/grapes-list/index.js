@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import {connectMongo} from '../../../../utils/connect';
 import Grape from '../../../../models/Grape';
+import {getSession} from 'next-auth/react';
 
 export default function GrapesList(props){
 
-    console.log('GGGGG', props)
     return(
             <FormContainer>
             <PageTitle>GRAPES LIST</PageTitle>
@@ -25,16 +25,19 @@ export default function GrapesList(props){
     );
 }
 
-export async function getServerSideProps(){
+export async function getServerSideProps(context){
 
     // const response = await fetch('http://localhost:3000/api/grape/grape-list');
     // const {data} = await response.json();
+    const session = await getSession(context);
 
-    let data;
+    let data = [];
     const client = await connectMongo();
     try{
-        const response = await Grape.find();
-        data = JSON.parse(JSON.stringify(response));
+        if(session){
+            const response = await Grape.find();
+            data = JSON.parse(JSON.stringify(response));    
+        }
     } catch (e) {
         console.error('Something wrong happend', e)
         data = [];
