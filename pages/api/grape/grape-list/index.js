@@ -1,7 +1,15 @@
 import {connectMongo} from '../../../../utils/connect';
 import Grape from '../../../../models/Grape';
+import {getSession} from 'next-auth/react';
 
 export default async function RetriveGrapes(req, res){
+
+    const session = await getSession({req});
+    console.log('##########', session)
+
+    if(!session){
+        res.send({status: 200, message: 'Unauthenticated user'});
+    }
     try{
         const client = await connectMongo();
         const response = await Grape.find();

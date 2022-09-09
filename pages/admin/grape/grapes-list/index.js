@@ -31,13 +31,21 @@ export async function getServerSideProps(context){
     // const {data} = await response.json();
     const session = await getSession(context);
 
+    if(!session){
+        return {
+            redirect:{
+                destination: '/api/auth/signin?callbackUrl=http://localhost:3000/admin/grape/grapes-list',
+                permanent: false
+            }
+        }
+    }
+
     let data = [];
     const client = await connectMongo();
+
     try{
-        if(session){
-            const response = await Grape.find();
-            data = JSON.parse(JSON.stringify(response));    
-        }
+        const response = await Grape.find();
+        data = JSON.parse(JSON.stringify(response));    
     } catch (e) {
         console.error('Something wrong happend', e)
         data = [];
