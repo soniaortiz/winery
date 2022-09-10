@@ -1,5 +1,5 @@
-import {connectMongo} from '../../../../utils/connect';
-import Grape from '../../../../models/Grape';
+import {connectMongo} from 'utils/connect';
+import Grape from 'models/Grape';
 import {getSession} from 'next-auth/react';
 
 export default async function RetriveGrapes(req, res){
