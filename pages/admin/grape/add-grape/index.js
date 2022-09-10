@@ -48,9 +48,9 @@ export default function GrapeForm(){
     const [{grapeName, grapeDescription}, setGrapeData] = useState(()=>({grapeName: '', grapeDescription: ''}));
     const [missingDataError, setError] = useState(()=>false);
 
-    useEffect(()=>{
-        validateData();
-    }, [grapeName, grapeDescription]);
+    // useEffect(()=>{
+    //     validateData();
+    // }, [grapeName, grapeDescription]);
 
     const handleGrapeData = ({target})=>{
         setGrapeData((prevState)=>({...prevState, [target.id]: target.value}));
