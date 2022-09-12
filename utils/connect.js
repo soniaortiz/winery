@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
+import getDBHost from "./getDBHost";
 
 export const connectMongo = async ()=>{
-    const client = await mongoose.connect(process.env.MONGO_URI);
+
+    const client = await mongoose.connect(getDBHost());
     return client;
 }
