@@ -1,5 +1,4 @@
 export default function getHost (){
     const environment = process.env.NODE_ENV;
-    console.log('????????????????????????', environment);
     return environment === 'development' ? 'http://localhost:3000' : 'https://winery-nine.vercel.app'
 }
