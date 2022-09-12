@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import getHost from 'utils/getHost';
 
 export default function WineBottles({data = []}){
     const [{filter, bottlesList}, setFilter] = useState(()=>({bottlesList: data, filter: ''}));
@@ -27,7 +28,7 @@ export default function WineBottles({data = []}){
 }
 
 export async function getServerSideProps(){
-    const response = await fetch('http://localhost:3000/api/wine-bottles/bottles-filter');
+    const response = await fetch(`${getHost()}/api/wine-bottles/bottles-filter`);
     const {data} = await response.json();
     return {
         props: {

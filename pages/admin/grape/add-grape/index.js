@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-
+import getHost from "utils/getHost";
 const Button = styled.button`
     display: block;
     margin: 20%;
@@ -67,9 +67,8 @@ export default function GrapeForm(){
 
     const saveGrape = async ()=>{
         validateData();
-
         if(!missingDataError){
-            const response = await fetch('http://localhost:3000/api/grape/new-grape', {
+            const response = await fetch(`${getHost()}/api/grape/new-grape`, {
                 method: 'POST',
                 body: JSON.stringify({
                     grapeDescription , 

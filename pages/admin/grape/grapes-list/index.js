@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {connectMongo} from 'utils/connect';
 import Grape from 'models/grape';
 import {getSession} from 'next-auth/react';
-
+import getHost from "utils/getHost";
 export default function GrapesList(props){
 
     return(
@@ -30,11 +30,14 @@ export async function getServerSideProps(context){
     // const response = await fetch('http://localhost:3000/api/grape/grape-list');
     // const {data} = await response.json();
     const session = await getSession(context);
+    var environment = process.env.NODE_ENV;
+
+    console.log('$$$$$$$$$$$$', environment);
 
     if(!session){
         return {
             redirect:{
-                destination: '/api/auth/signin?callbackUrl=http://localhost:3000/admin/grape/grapes-list',
+                destination: `/api/auth/signin?callbackUrl=${getHost()}/admin/grape/grapes-list`,
                 permanent: false
             }
         }
