@@ -32,12 +32,10 @@ export async function getServerSideProps(context){
     const session = await getSession(context);
     var environment = process.env.NODE_ENV;
 
-    console.log('$$$$$$$$$$$$', environment);
-
     if(!session){
         return {
             redirect:{
-                destination: `/api/auth/signin?callbackUrl=https://winery-nine.vercel.app/admin/grape/grapes-list`,
+                destination: `/api/auth/signin?callbackUrl=https://winery-nine.vercel.app/admin/grape/grapes-list/`,
                 permanent: false
             }
         }
