@@ -10,7 +10,7 @@ export default function GrapesList(props){
             <PageTitle>GRAPES LIST</PageTitle>
 
             {
-                <List>
+                props.list.length ? <List>
                     {
                         props.list.map(({grapeName, grapeDescription, _id})=>{
                             return (<li key={_id}>
@@ -19,7 +19,7 @@ export default function GrapesList(props){
                             </li>)
                         })
                     }
-                </List>
+                </List> : <p>No items saved</p>
             }               
             </FormContainer>
     );
