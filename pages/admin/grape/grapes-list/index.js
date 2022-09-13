@@ -35,7 +35,7 @@ export async function getServerSideProps(context){
     if(!session){
         return {
             redirect:{
-                destination: `/api/auth/signin?callbackUrl=https://winery-nine.vercel.app/admin/grape/grapes-list/`,
+                destination: `/api/auth/signin?callbackUrl=${getHost()}`,
                 permanent: false
             }
         }
