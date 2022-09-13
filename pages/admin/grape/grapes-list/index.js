@@ -3,16 +3,18 @@ import {connectMongo} from 'utils/connect';
 import Grape from 'models/grape';
 import {getSession} from 'next-auth/react';
 import getHost from "utils/getHost";
-export default function GrapesList(props){
+export default function GrapesList({list, error}){
 
     return(
             <FormContainer>
             <PageTitle>GRAPES LIST</PageTitle>
-
+            {
+                error ? <p>{error}</p>: null
+            }
             {
                 <List>
                     {
-                        props.list.map(({grapeName, grapeDescription, _id})=>{
+                        list.map(({grapeName, grapeDescription, _id})=>{
                             return (<li key={_id}>
                                 <GrapeName>{grapeName}</GrapeName>
                                 <p>{grapeDescription}</p>
@@ -39,13 +41,24 @@ export async function getServerSideProps(context){
     }
 
     let data = [];
-    // const client = await connectMongo();
-    // const response = await Grape.find();
-    // data = JSON.parse(JSON.stringify(response));    
-    // client.disconnect();
-    return{
-        props:{
-            list: data
+
+    try{
+        const client = await connectMongo();
+        const response = await Grape.find();
+        data = JSON.parse(JSON.stringify(response));    
+        client.disconnect();
+        return{
+            props:{
+                list: data
+            }
+        }
+
+    }catch (e){
+        return{
+            props:{
+                list: data,
+                error: 'Something wrong happend'
+            }
         }
     }
 
