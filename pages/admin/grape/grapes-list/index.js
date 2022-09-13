@@ -39,10 +39,10 @@ export async function getServerSideProps(context){
     }
 
     let data = [];
-    const client = await connectMongo();
-    const response = await Grape.find();
-    data = JSON.parse(JSON.stringify(response));    
-    client.disconnect();
+    // const client = await connectMongo();
+    // const response = await Grape.find();
+    // data = JSON.parse(JSON.stringify(response));    
+    // client.disconnect();
     return{
         props:{
             list: data
