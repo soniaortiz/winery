@@ -1,7 +1,6 @@
 export default function getDBHost(){
     const environment = process.env.NODE_ENV;
 
-    return process.env.MONGO_URI_PROD;
-
+    return environment === 'development'? process.env.MONGO_URI: process.env.MONGO_URI_PROD;
 
 }
