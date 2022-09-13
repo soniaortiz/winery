@@ -10,7 +10,7 @@ export default function GrapesList(props){
             <PageTitle>GRAPES LIST</PageTitle>
 
             {
-                props.list.length ? <List>
+                <List>
                     {
                         props.list.map(({grapeName, grapeDescription, _id})=>{
                             return (<li key={_id}>
@@ -19,7 +19,7 @@ export default function GrapesList(props){
                             </li>)
                         })
                     }
-                </List> : <p>No items saved</p>
+                </List>
             }               
             </FormContainer>
     );
@@ -27,8 +27,6 @@ export default function GrapesList(props){
 
 export async function getServerSideProps(context){
 
-    // const response = await fetch('http://localhost:3000/api/grape/grape-list');
-    // const {data} = await response.json();
     const session = await getSession(context);
 
     if(!session){
@@ -38,28 +36,25 @@ export async function getServerSideProps(context){
                 permanent: false
             }
         }
-    }else{
+    }
 
-        let data = [];
-        // @ add connection 
-        // const client = await connectMongo();
-    
-        try{
-            // @ add query to db
-            // const response = await Grape.find();
-            // data = JSON.parse(JSON.stringify(response));   
-            data = []; 
-        } catch (e) {
-            console.error('Something wrong happend', e)
-            data = [];
-        }
-    
-        // client.disconnect();
-    
-        return{
-            props:{
-                list: data
-            }
+    let data = [];
+    const client = await connectMongo();
+    // console.log('?????????????????????????', client);
+    try{
+        const response = await Grape.find();
+        console.log('####################', response)
+        data = JSON.parse(JSON.stringify(response));    
+    } catch (e) {
+        console.error('Something wrong happend', e)
+        data = [];
+    }
+
+    client.disconnect();
+
+    return{
+        props:{
+            list: data
         }
     }
 
