@@ -30,7 +30,6 @@ export async function getServerSideProps(context){
     // const response = await fetch('http://localhost:3000/api/grape/grape-list');
     // const {data} = await response.json();
     const session = await getSession(context);
-    var environment = process.env.NODE_ENV;
 
     if(!session){
         return {
@@ -39,24 +38,25 @@ export async function getServerSideProps(context){
                 permanent: false
             }
         }
-    }
+    }else{
 
-    let data = [];
-    const client = await connectMongo();
-
-    try{
-        const response = await Grape.find();
-        data = JSON.parse(JSON.stringify(response));    
-    } catch (e) {
-        console.error('Something wrong happend', e)
-        data = [];
-    }
-
-    client.disconnect();
-
-    return{
-        props:{
-            list: data
+        let data = [];
+        const client = await connectMongo();
+    
+        try{
+            const response = await Grape.find();
+            data = JSON.parse(JSON.stringify(response));    
+        } catch (e) {
+            console.error('Something wrong happend', e)
+            data = [];
+        }
+    
+        client.disconnect();
+    
+        return{
+            props:{
+                list: data
+            }
         }
     }
 
