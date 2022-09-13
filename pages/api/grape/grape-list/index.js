@@ -5,8 +5,6 @@ import {getSession} from 'next-auth/react';
 export default async function RetriveGrapes(req, res){
 
     const session = await getSession({req});
-    console.log('##########', session)
-
     if(!session){
         res.send({status: 200, message: 'Unauthenticated user'});
     }

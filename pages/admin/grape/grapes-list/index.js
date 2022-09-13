@@ -40,14 +40,17 @@ export async function getServerSideProps(context){
 
     let data = [];
     const client = await connectMongo();
-    // console.log('?????????????????????????', client);
     try{
         const response = await Grape.find();
-        console.log('####################', response)
         data = JSON.parse(JSON.stringify(response));    
     } catch (e) {
         console.error('Something wrong happend', e)
         data = [];
+        return{
+            props:{
+                list: data
+            }
+        }
     }
 
     client.disconnect();
