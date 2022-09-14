@@ -12,8 +12,7 @@ export default async function RetriveGrapes(req, res){
     }
     try{
         const client = await connectMongo();
-        const response = await Grape.find({grapeType: 2});
-        console.log('??????', response, typeof filterOpt);
+        const response = await Grape.find({grapeType: filterOpt});
 
         client.disconnect();
         res.send({status: 200, data: response});
