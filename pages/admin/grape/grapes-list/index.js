@@ -3,18 +3,48 @@ import {connectMongo} from 'utils/connect';
 import Grape from 'models/grape';
 import {getSession} from 'next-auth/react';
 import getHost from "utils/getHost";
-export default function GrapesList({list, error}){
+import { useState } from "react";
+
+export default function GrapesList({list =[], error}){
+
+    const [currentFilter, setFilter] = useState(()=>0);
+    const [filteredList, setFilteredList] = useState(()=>list);
+ 
+    const fetchFilteredList = async ()=>{
+        const response = await fetch(`${getHost()}/api/grape/grape-filter?filter=${currentFilter}`);
+        const data = await response.json();
+        console.log('!!!!!!!!!!!!', data)
+    };
+
+    const updateFilter = ({target})=>{
+        console.log(target.id);
+        setFilter(()=>target.id);
+        fetchFilteredList();
+    }
 
     return(
             <FormContainer>
             <PageTitle>GRAPES LIST</PageTitle>
+
+            {
+                <>
+                    <p>Filter by: </p>
+                    <button onClick={updateFilter} id={2}>White</button>
+                    <button onClick={updateFilter} id={1}>Red</button>
+                    <button onClick={updateFilter} id={0}>Reset</button>
+
+                </>
+            }
+
             {
                 error ? <p>{error}</p>: null
             }
+
+
             {
                 <List>
                     {
-                        list.map(({grapeName, grapeDescription, _id})=>{
+                        filteredList.map(({grapeName, grapeDescription, _id})=>{
                             return (<li key={_id}>
                                 <GrapeName>{grapeName}</GrapeName>
                                 <p>{grapeDescription}</p>
