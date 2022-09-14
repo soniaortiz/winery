@@ -34,7 +34,7 @@ export async function getServerSideProps(context){
     if(!session){
         return {
             redirect:{
-                destination: `/api/auth/signin?callbackUrl=${getHost()}`,
+                destination: `/api/auth/signin?callbackUrl=${getHost()}/admin/grape/grapes-list`,
                 permanent: false
             }
         }
