@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import getHost from "utils/getHost";
+import {getSession} from 'next-auth/react';
+
 const Button = styled.button`
     display: block;
     margin: 20%;
@@ -44,7 +46,7 @@ const ErrorData = styled.p`
     text-align: center;
 `
 
-export default function GrapeForm(){
+export default function GrapeForm({isUserAuthenticated}){
     const [{grapeName, grapeDescription}, setGrapeData] = useState(()=>({grapeName: '', grapeDescription: ''}));
     const [missingDataError, setError] = useState(()=>false);
 
@@ -82,7 +84,7 @@ export default function GrapeForm(){
         }
     }
 
-    return(
+    return isUserAuthenticated ? (
         <FormContainer>
             <PageTitle>GRAPE</PageTitle>
 
@@ -103,6 +105,25 @@ export default function GrapeForm(){
 
             <Button onClick={saveGrape}>Save</Button>
         </FormContainer>
+    ): <p>loading...</p>
+}
 
-    )
+export async function getServerSideProps(context){
+    const session = await getSession(context);
+
+    if(!session){
+        return {
+            redirect:{
+                destination: `/api/auth/signin?callbackUrl=${getHost()}/admin/grape/add-grape`,
+                permanent: false
+            }
+        }
+    }
+
+    return {
+        props:{
+            isUserAuthenticated: true
+        }
+    }
+
 }
