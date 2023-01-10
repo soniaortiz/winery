@@ -70,7 +70,8 @@ export default function GrapeForm({isUserAuthenticated}){
                 method: 'POST',
                 body: JSON.stringify({
                     grapeDescription , 
-                    grapeName 
+                    grapeName,
+                    grapeType: 1 
                 })
             });
             const data = await response.json();
