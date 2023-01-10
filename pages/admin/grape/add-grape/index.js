@@ -47,12 +47,8 @@ const ErrorData = styled.p`
 `
 
 export default function GrapeForm({isUserAuthenticated}){
-    const [{grapeName, grapeDescription}, setGrapeData] = useState(()=>({grapeName: '', grapeDescription: ''}));
+    const [{grapeName, grapeDescription}, setGrapeData] = useState(()=>({grapeName: '', grapeDescription: '', grapeType: 1}));
     const [missingDataError, setError] = useState(()=>false);
-
-    // useEffect(()=>{
-    //     validateData();
-    // }, [grapeName, grapeDescription]);
 
     const handleGrapeData = ({target})=>{
         setGrapeData((prevState)=>({...prevState, [target.id]: target.value}));

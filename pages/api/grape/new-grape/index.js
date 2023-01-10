@@ -9,7 +9,7 @@ export default async function SaveGrape(req, res){
         const a = await newGrape.save();
         client.disconnect();
         res.send({status: 200, message: 'New grape added'});
-    } catch{
-        res.send({status: 500, message: 'Someting went wrong'});
+    } catch(e){
+        res.send({status: 500, message: 'Someting went wrong', error: e});
     }
 }
