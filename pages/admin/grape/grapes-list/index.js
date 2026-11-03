@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {connectMongo} from 'utils/connect';
-import Grape from 'models/grape';
+import {Grape} from 'models/grape';
 import {getSession} from 'next-auth/react';
 import getHost from "utils/getHost";
 import { useEffect, useState } from "react";
@@ -50,7 +50,7 @@ export default function GrapesList({list =[], error}){
             {
                 <List>
                     {
-                        filteredList.map(({grapeName, grapeDescription, _id})=>{
+                        filteredList?.map(({grapeName, grapeDescription, _id})=>{
                             return (<li key={_id}>
                                 <GrapeName>{grapeName}</GrapeName>
                                 <p>{grapeDescription}</p>

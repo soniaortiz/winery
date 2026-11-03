@@ -1,5 +1,5 @@
 import {connectMongo} from 'utils/connect';
-import Grape from 'models/grape';
+import {Grape} from 'models/grape';
 import {getSession} from 'next-auth/react';
 
 export default async function RetriveGrapes(req, res){
@@ -17,6 +17,6 @@ export default async function RetriveGrapes(req, res){
         client.disconnect();
         res.send({status: 200, data: response});
     } catch{
-        res.send({status: 500, message: 'Someting went wrong'});
+        res.send({status: 500, message: 'Something went wrong'});
     }
 }

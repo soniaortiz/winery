@@ -1,5 +1,5 @@
 import {connectMongo} from 'utils/connect';
-import Grape from 'models/grape';
+import {Grape} from 'models/grape';
 
 export default async function SaveGrape(req, res){
     try{
