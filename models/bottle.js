@@ -8,4 +8,4 @@ const BottleSchema = new Schema({
     // country: {type: Schema.Types.ObjectId, ref: 'country'}
 });
 
-module.exports = models.Bottle || mongoose.model('Bottle', BottleSchema);
+export const  bottle = models.Bottle || mongoose.model('Bottle', BottleSchema);
