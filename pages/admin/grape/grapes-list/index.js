@@ -69,6 +69,7 @@ export async function getServerSideProps(context){
         console.log('????', `/api/auth/signin?callbackUrl=${getHost()}/admin/grape/grapes-list`)
 
     if(!session){
+        console.log('#### no session, create new session');
         return {
             redirect:{
                 destination: `/api/auth/signin?callbackUrl=${getHost()}/admin/grape/grapes-list`,
@@ -81,6 +82,7 @@ export async function getServerSideProps(context){
 
     try{
         const client = await connectMongo();
+        debugger;
         console.log('Connection down', getHost(), process.env.MONGO_URI_PROD)
         const response = await Grape.find();
         data = JSON.parse(JSON.stringify(response));    
