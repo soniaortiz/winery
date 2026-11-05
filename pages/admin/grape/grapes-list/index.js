@@ -82,7 +82,6 @@ export async function getServerSideProps(context){
 
     try{
         const client = await connectMongo();
-        debugger;
         console.log('Connection down', getHost(), process.env.MONGO_URI_PROD)
         const response = await Grape.find();
         data = JSON.parse(JSON.stringify(response));    
