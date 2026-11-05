@@ -66,6 +66,7 @@ export default function GrapesList({list =[], error}){
 export async function getServerSideProps(context){
 
     const session = await getSession(context);
+        console.log('????', `/api/auth/signin?callbackUrl=${getHost()}/admin/grape/grapes-list`)
 
     if(!session){
         return {
@@ -80,6 +81,7 @@ export async function getServerSideProps(context){
 
     try{
         const client = await connectMongo();
+        console.log('Connection down', getHost(), process.env.MONGO_URI_PROD)
         const response = await Grape.find();
         data = JSON.parse(JSON.stringify(response));    
         client.disconnect();
@@ -90,10 +92,11 @@ export async function getServerSideProps(context){
         }
 
     }catch (e){
+        console.error('Connection down', process.env.MONGO_URI_PROD, getHost(), e)
         return{
             props:{
                 list: data,
-                error: 'Something wrong happend'
+                error: `Something wrong happened: ${e}`
             }
         }
     }
